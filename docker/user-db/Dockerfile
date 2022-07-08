@@ -1,4 +1,4 @@
-FROM mongo:3
+FROM mongo:3.0.4
 ADD ./scripts /tmp/scripts
 
 # Modify child mongo to use /data/db-accounts as dbpath (because /data/db wont persist the build because it is already a VOLUME)

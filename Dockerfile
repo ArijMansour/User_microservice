@@ -1,11 +1,9 @@
 FROM golang:1.18.3
-#COPY . /go/src/github.com/ArijMansour/catalogue_microservice
-COPY . /home/arij/projects/user  
-#WORKDIR /go/src/github.com/ArijMansour/catalogue_microservice
-WORKDIR /home/arij/projects/user
-#RUN go get -u github.com/FiloSottile/gvt
-#RUN gvt restore && \CGO_ENABLED=0 GOOS=linux 
-#RUN go build -a -installsuffix cgo-o /app github.com/ArijMansour/catalogue_microservice/cmd/cataloguesvc
-RUN go build main.go
-CMD ["/main"]
-EXPOSE 8080
+COPY . /home/arij/projects/user1 
+WORKDIR /home/arij/projects/user1
+ENV HATEAOS user
+ENV USER_DATABASE mongodb
+ENV MONGO_HOST user-db
+RUN go build -o /user main.go
+CMD ["/user"]
+EXPOSE 8085

@@ -1,11 +1,28 @@
 version: '2'
 
 services:
+    user-db:
+        build:
+            context: ./docker/user-db/
+        image: mongo:3.0.4
+        hostname: user-db
+        restart: always
+        #volumes:
+          #- ./database:/data
+        environment:
+            - reschedule=on-node-failure  
+        
+        ports:
+            - "27017:27017"
+        
     user:
         build:
             context: .
-        image: weaveworksdemos/user
-        hostname: user
+        image: arijmansour/pfe_user_microservice:latest
+        #depends_on:
+         #user-db:
+           #condition: service_healthy
+        hostname: pfe_user_microservice
         restart: always
         cap_drop:
             - all
@@ -17,22 +34,4 @@ services:
             - reschedule=on-node-failure
         ports:
             - "8080:80"
-    user-db:
-        build:
-            context: ./docker/user-db/
-        image: weaveworksdemos/user-db
-        hostname: user-db
-        restart: always
-        cap_drop:
-            - all
-        cap_add:
-            - CHOWN
-            - SETGID
-            - SETUID
-        read_only: true
-        tmpfs:
-            - /tmp:rw,noexec,nosuid
-        environment:
-            - reschedule=on-node-failure
-        ports:
-            - "27017:27017"
+    
