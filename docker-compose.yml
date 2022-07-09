@@ -33,5 +33,5 @@ services:
             - MONGO_HOST=user-db:27017
             - reschedule=on-node-failure
         ports:
-            - "8080:80"
+            - "80:80"
     

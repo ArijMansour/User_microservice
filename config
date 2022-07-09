@@ -1,5 +1,5 @@
-# docker image prune -a 
+#docker image prune -a 
 #docker rm $(docker ps -a -q)
 #docker stop $(docker ps -a -q)
-
-#
+#sudo netstat -tunap | grep :80
+#sudo kill 
